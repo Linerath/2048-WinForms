@@ -1,0 +1,8 @@
+D:\C# Visual Studio\2048\2048\bin\Debug\2048.exe
+D:\C# Visual Studio\2048\2048\bin\Debug\2048.pdb
+D:\C# Visual Studio\2048\2048\obj\x86\Debug\_2048.MainForm.resources
+D:\C# Visual Studio\2048\2048\obj\x86\Debug\_2048.Properties.Resources.resources
+D:\C# Visual Studio\2048\2048\obj\x86\Debug\2048.csproj.GenerateResource.Cache
+D:\C# Visual Studio\2048\2048\obj\x86\Debug\2048.exe
+D:\C# Visual Studio\2048\2048\obj\x86\Debug\2048.pdb
+D:\C# Visual Studio\2048\2048\obj\x86\Debug\_2048.OptionsForm.resources
