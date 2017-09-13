@@ -40,10 +40,10 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.nudInterval2 = new System.Windows.Forms.NumericUpDown();
-            this.lInterval2 = new System.Windows.Forms.Label();
-            this.nudInterval1 = new System.Windows.Forms.NumericUpDown();
-            this.lInterval1 = new System.Windows.Forms.Label();
+            this.nudInt32erval2 = new System.Windows.Forms.NumericUpDown();
+            this.lInt32erval2 = new System.Windows.Forms.Label();
+            this.nudInt32erval1 = new System.Windows.Forms.NumericUpDown();
+            this.lInt32erval1 = new System.Windows.Forms.Label();
             this.cbEllipse = new System.Windows.Forms.CheckBox();
             this.bClose = new System.Windows.Forms.Button();
             this.pColor = new System.Windows.Forms.Panel();
@@ -55,8 +55,8 @@
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudInterval2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudInterval1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudInt32erval2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudInt32erval1)).BeginInit();
             this.SuspendLayout();
             // 
             // bOK
@@ -77,7 +77,7 @@
             // lMatrixSize
             // 
             this.lMatrixSize.AutoSize = true;
-            this.lMatrixSize.Font = new System.Drawing.Font("Segoe Print", 11.25F);
+            this.lMatrixSize.Font = new System.Drawing.Font("Segoe PrInt32", 11.25F);
             this.lMatrixSize.Location = new System.Drawing.Point(20, 6);
             this.lMatrixSize.Name = "lMatrixSize";
             this.lMatrixSize.Size = new System.Drawing.Size(186, 26);
@@ -111,7 +111,7 @@
             // lRows
             // 
             this.lRows.AutoSize = true;
-            this.lRows.Font = new System.Drawing.Font("Segoe Print", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lRows.Font = new System.Drawing.Font("Segoe PrInt32", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lRows.Location = new System.Drawing.Point(31, 36);
             this.lRows.Name = "lRows";
             this.lRows.Size = new System.Drawing.Size(66, 23);
@@ -121,7 +121,7 @@
             // lCells
             // 
             this.lCells.AutoSize = true;
-            this.lCells.Font = new System.Drawing.Font("Segoe Print", 9.75F);
+            this.lCells.Font = new System.Drawing.Font("Segoe PrInt32", 9.75F);
             this.lCells.Location = new System.Drawing.Point(31, 69);
             this.lCells.Name = "lCells";
             this.lCells.Size = new System.Drawing.Size(76, 23);
@@ -155,7 +155,7 @@
             // lTileSize
             // 
             this.lTileSize.AutoSize = true;
-            this.lTileSize.Font = new System.Drawing.Font("Segoe Print", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lTileSize.Font = new System.Drawing.Font("Segoe PrInt32", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lTileSize.Location = new System.Drawing.Point(13, 12);
             this.lTileSize.Name = "lTileSize";
             this.lTileSize.Size = new System.Drawing.Size(204, 26);
@@ -212,62 +212,62 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.DarkOrange;
-            this.panel3.Controls.Add(this.nudInterval2);
-            this.panel3.Controls.Add(this.lInterval2);
-            this.panel3.Controls.Add(this.nudInterval1);
-            this.panel3.Controls.Add(this.lInterval1);
+            this.panel3.Controls.Add(this.nudInt32erval2);
+            this.panel3.Controls.Add(this.lInt32erval2);
+            this.panel3.Controls.Add(this.nudInt32erval1);
+            this.panel3.Controls.Add(this.lInt32erval1);
             this.panel3.Location = new System.Drawing.Point(50, 125);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(195, 133);
             this.panel3.TabIndex = 10;
             // 
-            // nudInterval2
+            // nudInt32erval2
             // 
-            this.nudInterval2.BackColor = System.Drawing.Color.DarkOrange;
-            this.nudInterval2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.nudInterval2.Location = new System.Drawing.Point(64, 104);
-            this.nudInterval2.Name = "nudInterval2";
-            this.nudInterval2.Size = new System.Drawing.Size(57, 22);
-            this.nudInterval2.TabIndex = 10;
-            this.nudInterval2.Value = new decimal(new int[] {
+            this.nudInt32erval2.BackColor = System.Drawing.Color.DarkOrange;
+            this.nudInt32erval2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.nudInt32erval2.Location = new System.Drawing.Point(64, 104);
+            this.nudInt32erval2.Name = "nudInt32erval2";
+            this.nudInt32erval2.Size = new System.Drawing.Size(57, 22);
+            this.nudInt32erval2.TabIndex = 10;
+            this.nudInt32erval2.Value = new decimal(new int[] {
             10,
             0,
             0,
             0});
             // 
-            // lInterval2
+            // lInt32erval2
             // 
-            this.lInterval2.AutoSize = true;
-            this.lInterval2.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lInterval2.Location = new System.Drawing.Point(10, 74);
-            this.lInterval2.Name = "lInterval2";
-            this.lInterval2.Size = new System.Drawing.Size(158, 21);
-            this.lInterval2.TabIndex = 9;
-            this.lInterval2.Text = "Интервал до матрицы";
+            this.lInt32erval2.AutoSize = true;
+            this.lInt32erval2.Font = new System.Drawing.Font("Segoe PrInt32", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lInt32erval2.Location = new System.Drawing.Point(10, 74);
+            this.lInt32erval2.Name = "lInt32erval2";
+            this.lInt32erval2.Size = new System.Drawing.Size(158, 21);
+            this.lInt32erval2.TabIndex = 9;
+            this.lInt32erval2.Text = "Интервал до матрицы";
             // 
-            // nudInterval1
+            // nudInt32erval1
             // 
-            this.nudInterval1.BackColor = System.Drawing.Color.DarkOrange;
-            this.nudInterval1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.nudInterval1.Location = new System.Drawing.Point(64, 35);
-            this.nudInterval1.Name = "nudInterval1";
-            this.nudInterval1.Size = new System.Drawing.Size(57, 22);
-            this.nudInterval1.TabIndex = 8;
-            this.nudInterval1.Value = new decimal(new int[] {
+            this.nudInt32erval1.BackColor = System.Drawing.Color.DarkOrange;
+            this.nudInt32erval1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.nudInt32erval1.Location = new System.Drawing.Point(64, 35);
+            this.nudInt32erval1.Name = "nudInt32erval1";
+            this.nudInt32erval1.Size = new System.Drawing.Size(57, 22);
+            this.nudInt32erval1.TabIndex = 8;
+            this.nudInt32erval1.Value = new decimal(new int[] {
             10,
             0,
             0,
             0});
             // 
-            // lInterval1
+            // lInt32erval1
             // 
-            this.lInterval1.AutoSize = true;
-            this.lInterval1.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lInterval1.Location = new System.Drawing.Point(3, 5);
-            this.lInterval1.Name = "lInterval1";
-            this.lInterval1.Size = new System.Drawing.Size(192, 21);
-            this.lInterval1.TabIndex = 7;
-            this.lInterval1.Text = "Интервал между клетками:";
+            this.lInt32erval1.AutoSize = true;
+            this.lInt32erval1.Font = new System.Drawing.Font("Segoe PrInt32", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lInt32erval1.Location = new System.Drawing.Point(3, 5);
+            this.lInt32erval1.Name = "lInt32erval1";
+            this.lInt32erval1.Size = new System.Drawing.Size(192, 21);
+            this.lInt32erval1.TabIndex = 7;
+            this.lInt32erval1.Text = "Интервал между клетками:";
             // 
             // cbEllipse
             // 
@@ -347,8 +347,8 @@
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudInterval2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudInterval1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudInt32erval2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudInt32erval1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -367,10 +367,10 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label lInterval1;
-        private System.Windows.Forms.NumericUpDown nudInterval1;
-        private System.Windows.Forms.NumericUpDown nudInterval2;
-        private System.Windows.Forms.Label lInterval2;
+        private System.Windows.Forms.Label lInt32erval1;
+        private System.Windows.Forms.NumericUpDown nudInt32erval1;
+        private System.Windows.Forms.NumericUpDown nudInt32erval2;
+        private System.Windows.Forms.Label lInt32erval2;
         private System.Windows.Forms.Button bClose;
         private System.Windows.Forms.CheckBox cbEllipse;
         private System.Windows.Forms.Panel pColor;

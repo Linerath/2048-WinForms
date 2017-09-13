@@ -10,7 +10,7 @@ namespace Game_2048
 {
     public delegate void EndGameEventHandler();
     public delegate void ScoreOverflowEventHandler();
-    public delegate void NewTileEventHandler(int x, int y);
+    public delegate void NewTileEventHandler(Int32 x, Int32 y);
 
     public sealed class _2048
     {
@@ -18,43 +18,42 @@ namespace Game_2048
         public event ScoreOverflowEventHandler ScoreOverflowEvent;
         public event NewTileEventHandler NewTileEvent;
 
-        private readonly int _minValue;   // минимально выпадающее значение
-        private int _score;                // очки
-        private int[,] _matrix;
-        LimitedStack<int[,]> history;     // ограниченный стек действий
-        LimitedStack<int> scoreHistory;   // ограниченный стек очков
-        private int historyMaxLength = 5; // количество разрешенных отмен операций
+        private Int32 _minValue;             // минимально выпадающее значение
+        private Int32 _score;                // очки
+        private Int32[,] _matrix;
+        private LimitedStack<Int32[,]> _history;     // ограниченный стек действий
+        private LimitedStack<Int32> _scoreHistory;   // ограниченный стек очков
+        private Int32 _historyMaxLength = 5; // количество разрешенных отмен операций
 
-        public _2048(int rows, int cells, int minValue = 2)
+        public _2048(Int32 rows, Int32 cells, Int32 minValue = 2)
         {
             if (rows < 2 || cells < 2)
-                throw new ArgumentException("Размер матрицы не может быть меньше 2х2");
+                throw new ArgumentException("Размер матрицы не может быть меньше 2х2.");
 
             _minValue = minValue;
             New(rows, cells);
         }
 
-        public bool TrySaveGame(string file)
+        public Boolean TrySaveGame(String file)
         {
             if (file == null || !File.Exists(file)) return false;
             try
             {
-                using (BinaryWriter bw = new BinaryWriter(new FileStream(file, FileMode.Create)))
+                using (BinaryWriter bw = new BinaryWriter(new FileStream(file, FileMode.Truncate)))
                 {
                     bw.Write(_minValue);
                     bw.Write(_score);
                     bw.Write(_matrix.GetLength(0));
                     bw.Write(_matrix.GetLength(1));
-                    foreach (int i in _matrix)
+                    foreach (Int32 i in _matrix)
                         bw.Write(i);
-                    bw.Write(historyMaxLength);
+                    bw.Write(_historyMaxLength);
 
                     return true;
                 }
             }
             catch (IOException)
             {
-
                 return false;
             }
             catch
@@ -63,13 +62,24 @@ namespace Game_2048
             }
         }
 
-        public bool TryLoadGame(string file)
+        public Boolean TryLoadGame(String file)
         {
             if (file == null || !File.Exists(file)) return false;
             try
             {
                 using (BinaryReader br = new BinaryReader(new FileStream(file, FileMode.OpenOrCreate)))
                 {
+                    _minValue = br.ReadInt32();
+                    _score = br.ReadInt32();
+                    _matrix = new Int32[br.ReadInt32(), br.ReadInt32()];
+                    for (Int32 i =0; i < _matrix.GetLength(0); i++)
+                    {
+                        for (Int32 j = 0; j < _matrix.GetLength(1); j++)
+                        {
+                            _matrix[i, j] = br.ReadInt32();
+                        }
+                    }
+                    _historyMaxLength = br.ReadInt32();
                     return true;
                 }
             }
@@ -84,30 +94,30 @@ namespace Game_2048
         }
 
         // Генерация нового поля.
-        public void New(int rows, int cells)
+        public void New(Int32 rows, Int32 cells)
         {
             Random random = new Random();
-            _matrix = new int[rows, cells];
-            int count = random.Next(1, 5);
+            _matrix = new Int32[rows, cells];
+            Int32 count = random.Next(1, 5);
 
             while (count != 0)
             {
                 NewElement();
                 count--;
             }
-            history = new LimitedStack<int[,]>(historyMaxLength);
-            scoreHistory = new LimitedStack<int>(historyMaxLength);
+            _history = new LimitedStack<Int32[,]>(_historyMaxLength);
+            _scoreHistory = new LimitedStack<Int32>(_historyMaxLength);
         }
         // Генерация нового числа.
         private void NewElement()
         {
             Random random = new Random();
-            int size = _matrix.Length;
-            int rows = _matrix.GetLength(0);
-            int cells = _matrix.GetLength(1);
+            Int32 size = _matrix.Length;
+            Int32 rows = _matrix.GetLength(0);
+            Int32 cells = _matrix.GetLength(1);
 
-            int x = random.Next(0, rows);
-            int y = random.Next(0, cells);
+            Int32 x = random.Next(0, rows);
+            Int32 y = random.Next(0, cells);
 
             while (_matrix[x, y] != 0)
             {
@@ -126,53 +136,50 @@ namespace Game_2048
                 EndGameEvent();
         }
 
-        public int[,] GetMatrix()
+        public Int32[,] GetMatrix()
         {
-            int[,] temporary = new int[_matrix.GetLength(0), _matrix.GetLength(1)];
+            Int32[,] temporary = new Int32[_matrix.GetLength(0), _matrix.GetLength(1)];
             Array.Copy(_matrix, temporary, _matrix.Length);
             return temporary;
         }
-        public int GetScore()
-        {
-            return _score; 
-        }
+        public Int32 Score => _score;
 
-        public bool TryMoveDown()
+        public Boolean TryMoveDown()
         {
             return Move(down: true);
         }
-        public bool TryMoveUp()
+        public Boolean TryMoveUp()
         {
             return Move(up: true);
         }
-        public bool TryMoveLeft()
+        public Boolean TryMoveLeft()
         {
             return Move(left: true);
         }
-        public bool TryMoveRight()
+        public Boolean TryMoveRight()
         {
             return Move(right: true);
         }
         // *В РАЗРАБОТКЕ*
-        private bool Move(bool down = false, bool up = false, bool left = false, bool right = false)
+        private Boolean Move(Boolean down = false, Boolean up = false, Boolean left = false, Boolean right = false)
         {
             if (!down && !up && !left && !right) throw new ArgumentException("1 argument must be true.");
 
-            int rows = _matrix.GetLength(0);
-            int cells = _matrix.GetLength(1);
-            int moveScore = 0;
-            bool oneMoved = false;
+            Int32 rows = _matrix.GetLength(0);
+            Int32 cells = _matrix.GetLength(1);
+            Int32 moveScore = 0;
+            Boolean oneMoved = false;
 
-            int originalScore = _score;
-            int[,] original_matrix = new int[rows, cells];
+            Int32 originalScore = _score;
+            Int32[,] original_matrix = new Int32[rows, cells];
             Array.Copy(_matrix, original_matrix, _matrix.Length);
-            int untill;
+            Int32 untill;
             if (down || up) untill = cells;
             else untill = rows;
-            for (int i = 0; i < untill; i++)
+            for (Int32 i = 0; i < untill; i++)
             {
-                int[] line = null;
-                int lineScore = 0;
+                Int32[] line = null;
+                Int32 lineScore = 0;
                 if (down)
                     line = _matrixOperations.SelectRow(_matrix, 0, i, rows - 1, i);
                 else if (up)
@@ -187,8 +194,7 @@ namespace Game_2048
                 }
                 catch (OverflowException)
                 {
-                    if (ScoreOverflowEvent != null)
-                        ScoreOverflowEvent();
+                    ScoreOverflowEvent?.Invoke();
                 }
                 if (lineScore >= 0)
                 {
@@ -212,28 +218,27 @@ namespace Game_2048
                 }
                 catch (OverflowException)
                 {
-                    if (ScoreOverflowEvent != null)
-                        ScoreOverflowEvent();
+                    ScoreOverflowEvent?.Invoke();
                 }
-                history.Push(original_matrix);
-                scoreHistory.Push(originalScore);
+                _history.Push(original_matrix);
+                _scoreHistory.Push(originalScore);
                 NewElement();
                 return true;
             }
-            else return false;
+            return false;
         }
 
-        public bool UndoAllowed()
+        public Boolean UndoAllowed()
         {
-            return history.Count == 0 ? false : true;
+            return _history.Count == 0 ? false : true;
         }
         public void Undo()
         {
-            if (history.Count == 0)
+            if (_history.Count == 0)
                 return;
 
-            _matrix = history.Pop();
-            _score= scoreHistory.Pop();
+            _matrix = _history.Pop();
+            _score = _scoreHistory.Pop();
         }
     }
 
@@ -242,23 +247,23 @@ namespace Game_2048
     {
         // Выделение строки матрицы по заданным координатам.
         // *В РАЗРАБОТКЕ*
-        public static int[] SelectRow(int[,] _matrix, int x1, int y1, int x2, int y2)
+        public static Int32[] SelectRow(Int32[,] _matrix, Int32 x1, Int32 y1, Int32 x2, Int32 y2)
         {
             if (_matrix == null) return null;
 
             if (x1 == x2)
             {
-                int[] row = new int[Math.Abs(y2 - y1) + 1];
+                Int32[] row = new Int32[Math.Abs(y2 - y1) + 1];
                 if (y1 > y2)
                 {
-                    for (int i = y1, j = 0; i >= y2; i--, j++)
+                    for (Int32 i = y1, j = 0; i >= y2; i--, j++)
                     {
                         row[j] = _matrix[x1, i];
                     }
                 }
                 else
                 {
-                    for (int i = y1, j = 0; i <= y2; i++, j++)
+                    for (Int32 i = y1, j = 0; i <= y2; i++, j++)
                     {
                         row[j] = _matrix[x1, i];
                     }
@@ -267,17 +272,17 @@ namespace Game_2048
             }
             else if (y1 == y2)
             {
-                int[] row = new int[Math.Abs(x2 - x1) + 1];
+                Int32[] row = new Int32[Math.Abs(x2 - x1) + 1];
                 if (x1 > x2)
                 {
-                    for (int i = x1, j = 0; i >= x2; i--, j++)
+                    for (Int32 i = x1, j = 0; i >= x2; i--, j++)
                     {
                         row[j] = _matrix[i, y1];
                     }
                 }
                 else
                 {
-                    for (int i = x1, j = 0; i <= x2; i++, j++)
+                    for (Int32 i = x1, j = 0; i <= x2; i++, j++)
                     {
                         row[j] = _matrix[i, y1];
                     }
@@ -290,7 +295,7 @@ namespace Game_2048
 
         // Установка строки матрицы.
         // *В РАЗРАБОТКЕ*
-        public static void SetLine(int[,] _matrix, int[] line, int x1, int y1, int x2, int y2)
+        public static void SetLine(Int32[,] _matrix, Int32[] line, Int32 x1, Int32 y1, Int32 x2, Int32 y2)
         {
             if (line == null) return;
 
@@ -298,14 +303,14 @@ namespace Game_2048
             {
                 if (y1 > y2)
                 {
-                    for (int i = y1, j = 0; i >= y2; i--, j++)
+                    for (Int32 i = y1, j = 0; i >= y2; i--, j++)
                     {
                         _matrix[x1, i] = line[j];
                     }
                 }
                 else
                 {
-                    for (int i = y1, j = 0; i <= y2; i++, j++)
+                    for (Int32 i = y1, j = 0; i <= y2; i++, j++)
                     {
                         _matrix[x1, i] = line[j];
                     }
@@ -315,14 +320,14 @@ namespace Game_2048
             {
                 if (x1 > x2)
                 {
-                    for (int i = x1, j = 0; i >= x2; i--, j++)
+                    for (Int32 i = x1, j = 0; i >= x2; i--, j++)
                     {
                         _matrix[i, y1] = line[j];
                     }
                 }
                 else
                 {
-                    for (int i = x1, j = 0; i <= x2; i++, j++)
+                    for (Int32 i = x1, j = 0; i <= x2; i++, j++)
                     {
                         _matrix[i, y1] = line[j];
                     }
@@ -333,18 +338,18 @@ namespace Game_2048
         }
 
         // Сдвиг одной линии матрицы по правилам игры.
-        public static int LineShiftAttempt(int[] line)
+        public static Int32 LineShiftAttempt(Int32[] line)
         {
             if (line == null || line.Length < 2)
                 throw new ArgumentException("Aray length must be more than 1");
 
-            bool[] connected = new bool[line.Length];
-            bool moved = false;
-            int score = 0;
+            Boolean[] connected = new Boolean[line.Length];
+            Boolean moved = false;
+            Int32 score = 0;
 
-            for (int i = 0; i < line.Length; i++)
+            for (Int32 i = 0; i < line.Length; i++)
             {
-                for (int j = line.Length - 1; j > 0; j--)
+                for (Int32 j = line.Length - 1; j > 0; j--)
                 {
                     if (line[j - 1] != 0 && line[j - 1] == line[j] && !connected[j] && !connected[j - 1])
                     {
@@ -367,13 +372,13 @@ namespace Game_2048
 
         // Можно ли сдвинуть матрицу в какую-либо сторону по правилам игры.
         // *В РАЗРАБОТКЕ*
-        public static bool CanBeMoved(int[,] _matrix)
+        public static Boolean CanBeMoved(Int32[,] _matrix)
         {
             if (_matrix == null) return false;
 
-            for (int i = 0; i < _matrix.GetLength(0); i++)
+            for (Int32 i = 0; i < _matrix.GetLength(0); i++)
             {
-                for (int j = 0; j < _matrix.GetLength(1); j++)
+                for (Int32 j = 0; j < _matrix.GetLength(1); j++)
                 {
                     if ((i > 0 && ((_matrix[i - 1, j] == _matrix[i, j]) || _matrix[i - 1, j] == 0)) ||
                         (i < _matrix.GetLength(0) - 1 && ((_matrix[i + 1, j] == _matrix[i, j]) || _matrix[i + 1, j] == 0)) ||
@@ -389,9 +394,9 @@ namespace Game_2048
     /*Медленная реализация ограниченного стека*/
     public class LimitedStack<T> : Stack<T>
     {
-        private int _maxLength;
+        private Int32 _maxLength;
 
-        public LimitedStack(int maxLength)
+        public LimitedStack(Int32 maxLength)
         {
             _maxLength = maxLength;
         }
@@ -401,29 +406,29 @@ namespace Game_2048
             if (this.Count == _maxLength)
             {
                 List<T> tempList = this.ToList<T>();
-                for (int i = tempList.Count - 1; i > 0; i--)
+                for (Int32 i = tempList.Count - 1; i > 0; i--)
                 {
                     tempList[i] = tempList[i - 1];
                 }
-                for (int i = this.Count - 1; i > 0; i--)
+                for (Int32 i = this.Count - 1; i > 0; i--)
                 {
                     tempList[i] = tempList[i - 1];
                 }
                 tempList[0] = element;
                 this.Clear();
-                for (int i = tempList.Count - 1; i >= 0; i--)
+                for (Int32 i = tempList.Count - 1; i >= 0; i--)
                 {
                     base.Push(tempList[i]);
                 }
 
                 //T[] newStack = this.ToArray();
-                //for (int i = this.Count - 1; i > 0; i--)
+                //for (Int32 i = this.Count - 1; i > 0; i--)
                 //{
                 //    newStack[i] = newStack[i - 1];
                 //}
                 //newStack[0] = element;
                 //this.Clear();
-                //for (int i = newStack.Length - 1; i >= 0; i--)
+                //for (Int32 i = newStack.Length - 1; i >= 0; i--)
                 //{
                 //    base.Push(newStack[i]);
                 //}

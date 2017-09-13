@@ -20,15 +20,15 @@ namespace _2048
         {
             InitializeComponent();
         }
-        public OptionsForm(int matrixRows, int matrixCells, Size tileSize, int intervalBetweenTiles, int borderInterval, Color backColor)
+        public OptionsForm(Int32 matrixRows, Int32 matrixCells, Size tileSize, Int32 Int32ervalBetweenTiles, Int32 borderInt32erval, Color backColor)
         {
             InitializeComponent();
 
             nudRows.Value = matrixRows;
             nudCells.Value = matrixCells;
             nudTileSize.Value = tileSize.Width;
-            nudInterval1.Value = intervalBetweenTiles;
-            nudInterval2.Value = borderInterval;
+            nudInt32erval1.Value = Int32ervalBetweenTiles;
+            nudInt32erval2.Value = borderInt32erval;
             pColor.BackColor = backColor;
         }
 
@@ -47,8 +47,8 @@ namespace _2048
                     nudRows.Value = br.ReadInt32();
                     nudCells.Value = br.ReadInt32();
                     nudTileSize.Value = br.ReadInt32();
-                    nudInterval1.Value = br.ReadInt32();
-                    nudInterval2.Value = br.ReadInt32();
+                    nudInt32erval1.Value = br.ReadInt32();
+                    nudInt32erval2.Value = br.ReadInt32();
                     cbEllipse.Checked = br.ReadBoolean();
                     pColor.BackColor = Color.FromArgb(br.ReadByte(), br.ReadByte(), br.ReadByte(), br.ReadByte());
                 }
@@ -81,13 +81,13 @@ namespace _2048
         private void bOK_Click(object sender, EventArgs e)
         {
             Size tileSize = new Size(Convert.ToInt32(nudTileSize.Value), Convert.ToInt32(nudTileSize.Value));
-            int rows = Convert.ToInt32(nudRows.Value);
-            int cells = Convert.ToInt32(nudCells.Value);
-            int borderInterval = Convert.ToInt32(nudInterval2.Value);
-            int interval = Convert.ToInt32(nudInterval1.Value);
+            Int32 rows = Convert.ToInt32(nudRows.Value);
+            Int32 cells = Convert.ToInt32(nudCells.Value);
+            Int32 borderInt32erval = Convert.ToInt32(nudInt32erval2.Value);
+            Int32 Int32erval = Convert.ToInt32(nudInt32erval1.Value);
 
             if (mf != null) mf.Close();
-            mf = new MainForm(rows, cells, tileSize, interval, borderInterval, cbEllipse.Checked, pColor.BackColor);
+            mf = new MainForm(rows, cells, tileSize, Int32erval, borderInt32erval, cbEllipse.Checked, pColor.BackColor);
             this.Hide();
             mf.Show();
             mf.OptionsEvent += OnOptions;
@@ -109,9 +109,9 @@ namespace _2048
         }
         private void OptionsForm_MouseDown(object sender, MouseEventArgs e)
         {
-            this.Capture = false;
+            Capture = false;
             Message m = Message.Create(this.Handle, 0xa1, new IntPtr(2), IntPtr.Zero);
-            this.WndProc(ref m);
+            WndProc(ref m);
         }
     }
 }
