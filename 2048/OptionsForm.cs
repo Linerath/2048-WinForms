@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Threading;
 using System.IO;
 
 namespace _2048
@@ -14,7 +8,7 @@ namespace _2048
     public partial class OptionsForm : Form
     {
         private bool options = false;
-        MainForm mf;
+        private MainForm mf;
 
         public OptionsForm()
         {
@@ -27,15 +21,15 @@ namespace _2048
             nudRows.Value = matrixRows;
             nudCells.Value = matrixCells;
             nudTileSize.Value = tileSize.Width;
-            nudInt32erval1.Value = Int32ervalBetweenTiles;
-            nudInt32erval2.Value = borderInt32erval;
+            nudInterval1.Value = Int32ervalBetweenTiles;
+            nudInterval2.Value = borderInt32erval;
             pColor.BackColor = backColor;
         }
 
         private void OnOptions()
         {
             options = true;
-            this.Show();
+            Show();
             if (mf != null) mf.Enabled = false;
         }
         private void ReadSettings()
@@ -47,8 +41,8 @@ namespace _2048
                     nudRows.Value = br.ReadInt32();
                     nudCells.Value = br.ReadInt32();
                     nudTileSize.Value = br.ReadInt32();
-                    nudInt32erval1.Value = br.ReadInt32();
-                    nudInt32erval2.Value = br.ReadInt32();
+                    nudInterval1.Value = br.ReadInt32();
+                    nudInterval2.Value = br.ReadInt32();
                     cbEllipse.Checked = br.ReadBoolean();
                     pColor.BackColor = Color.FromArgb(br.ReadByte(), br.ReadByte(), br.ReadByte(), br.ReadByte());
                 }
@@ -71,7 +65,7 @@ namespace _2048
                     mf.Enabled = true;
                 e.Cancel = true;
                 options = false;
-                this.Hide();
+                Hide();
             }
         }
         private void StartForm_Load(object sender, EventArgs e)
@@ -83,18 +77,18 @@ namespace _2048
             Size tileSize = new Size(Convert.ToInt32(nudTileSize.Value), Convert.ToInt32(nudTileSize.Value));
             Int32 rows = Convert.ToInt32(nudRows.Value);
             Int32 cells = Convert.ToInt32(nudCells.Value);
-            Int32 borderInt32erval = Convert.ToInt32(nudInt32erval2.Value);
-            Int32 Int32erval = Convert.ToInt32(nudInt32erval1.Value);
+            Int32 borderInt32erval = Convert.ToInt32(nudInterval2.Value);
+            Int32 Int32erval = Convert.ToInt32(nudInterval1.Value);
 
             if (mf != null) mf.Close();
             mf = new MainForm(rows, cells, tileSize, Int32erval, borderInt32erval, cbEllipse.Checked, pColor.BackColor);
-            this.Hide();
+            Hide();
             mf.Show();
             mf.OptionsEvent += OnOptions;
         }
         private void bClose_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
         private void pColor_Click(object sender, EventArgs e)
         {

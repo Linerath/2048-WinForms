@@ -40,9 +40,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.nudInt32erval2 = new System.Windows.Forms.NumericUpDown();
+            this.nudInterval2 = new System.Windows.Forms.NumericUpDown();
             this.lInt32erval2 = new System.Windows.Forms.Label();
-            this.nudInt32erval1 = new System.Windows.Forms.NumericUpDown();
+            this.nudInterval1 = new System.Windows.Forms.NumericUpDown();
             this.lInt32erval1 = new System.Windows.Forms.Label();
             this.cbEllipse = new System.Windows.Forms.CheckBox();
             this.bClose = new System.Windows.Forms.Button();
@@ -55,8 +55,8 @@
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudInt32erval2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudInt32erval1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudInterval2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudInterval1)).BeginInit();
             this.SuspendLayout();
             // 
             // bOK
@@ -212,9 +212,9 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.DarkOrange;
-            this.panel3.Controls.Add(this.nudInt32erval2);
+            this.panel3.Controls.Add(this.nudInterval2);
             this.panel3.Controls.Add(this.lInt32erval2);
-            this.panel3.Controls.Add(this.nudInt32erval1);
+            this.panel3.Controls.Add(this.nudInterval1);
             this.panel3.Controls.Add(this.lInt32erval1);
             this.panel3.Location = new System.Drawing.Point(50, 125);
             this.panel3.Name = "panel3";
@@ -223,13 +223,13 @@
             // 
             // nudInt32erval2
             // 
-            this.nudInt32erval2.BackColor = System.Drawing.Color.DarkOrange;
-            this.nudInt32erval2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.nudInt32erval2.Location = new System.Drawing.Point(64, 104);
-            this.nudInt32erval2.Name = "nudInt32erval2";
-            this.nudInt32erval2.Size = new System.Drawing.Size(57, 22);
-            this.nudInt32erval2.TabIndex = 10;
-            this.nudInt32erval2.Value = new decimal(new int[] {
+            this.nudInterval2.BackColor = System.Drawing.Color.DarkOrange;
+            this.nudInterval2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.nudInterval2.Location = new System.Drawing.Point(64, 104);
+            this.nudInterval2.Name = "nudInt32erval2";
+            this.nudInterval2.Size = new System.Drawing.Size(57, 22);
+            this.nudInterval2.TabIndex = 10;
+            this.nudInterval2.Value = new decimal(new int[] {
             10,
             0,
             0,
@@ -247,13 +247,13 @@
             // 
             // nudInt32erval1
             // 
-            this.nudInt32erval1.BackColor = System.Drawing.Color.DarkOrange;
-            this.nudInt32erval1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.nudInt32erval1.Location = new System.Drawing.Point(64, 35);
-            this.nudInt32erval1.Name = "nudInt32erval1";
-            this.nudInt32erval1.Size = new System.Drawing.Size(57, 22);
-            this.nudInt32erval1.TabIndex = 8;
-            this.nudInt32erval1.Value = new decimal(new int[] {
+            this.nudInterval1.BackColor = System.Drawing.Color.DarkOrange;
+            this.nudInterval1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.nudInterval1.Location = new System.Drawing.Point(64, 35);
+            this.nudInterval1.Name = "nudInt32erval1";
+            this.nudInterval1.Size = new System.Drawing.Size(57, 22);
+            this.nudInterval1.TabIndex = 8;
+            this.nudInterval1.Value = new decimal(new int[] {
             10,
             0,
             0,
@@ -347,8 +347,8 @@
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudInt32erval2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudInt32erval1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudInterval2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudInterval1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -368,8 +368,8 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label lInt32erval1;
-        private System.Windows.Forms.NumericUpDown nudInt32erval1;
-        private System.Windows.Forms.NumericUpDown nudInt32erval2;
+        private System.Windows.Forms.NumericUpDown nudInterval1;
+        private System.Windows.Forms.NumericUpDown nudInterval2;
         private System.Windows.Forms.Label lInt32erval2;
         private System.Windows.Forms.Button bClose;
         private System.Windows.Forms.CheckBox cbEllipse;

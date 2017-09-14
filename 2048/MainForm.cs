@@ -1,17 +1,13 @@
 ﻿#define SettingsFromFile
 
 using System;
-using System.ComponentModel;
 using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
-using Game_2048;
 using G_2048 = Game_2048._2048;
 
 namespace _2048
@@ -22,24 +18,24 @@ namespace _2048
     {
         public event OptionsEventHandler OptionsEvent;
 
-        private Int32 score;
-        private Int32 bestScore;
-        private Int32 minValue = 2;
-        private Int32 matrixRows = 4;
-        private Int32 matrixCells = 4;
-        private Int32 Int32ervalBetweenTiles = 10;
-        private Int32 borderInt32erval = 10;
+        private Int32 score;                        // Очки
+        private Int32 bestScore;                    // Рекорд
+        private Int32 minValue = 2;                 // Минимально выпадающий блок
+        private Int32 matrixRows = 4;               // Количество строк
+        private Int32 matrixCells = 4;              // Количество столбцов
+        private Int32 intervalBetweenTiles = 10;    // Интервал между блоками (тайлами)
+        private Int32 borderInterval = 10;          // Интервал до края формы
         private Boolean gameOver = true;
-        private Boolean lockOn = false;
-        private Boolean ellipseTile = false;
+        private Boolean lockOn = false;             // Задержка между сдвигами
+        private Boolean ellipseTile = false;        // Круговые тайлы
         /*****/
-        private Button[] tiles;
+        private Button[] tiles;                     // Массив тайлов (кнопок)
         /*****/
         private G_2048 game;
         private Size tileSize = new Size(60, 60);
         private Size normalFormSize = new Size(323, 466);
-        private Dictionary<Int32, Color> colors;   // Цвета плиток.
-        private Dictionary<String, Int32> records; // Рекорды для каждого размера поля.
+        private Dictionary<Int32, Color> colors;    // Цвета плиток
+        private Dictionary<String, Int32> records;  // Рекорды для каждого размера поля
 
         public MainForm()
         {
@@ -51,8 +47,8 @@ namespace _2048
                 return;
             matrixRows = _matrixRows;
             matrixCells = _matrixCells;
-            Int32ervalBetweenTiles = _Int32ervalBetweenTiles;
-            borderInt32erval = _borderInt32erval;
+            intervalBetweenTiles = _Int32ervalBetweenTiles;
+            borderInterval = _borderInt32erval;
             ellipseTile = _ellipseTile;
             tileSize = new Size(_tileSize.Width, _tileSize.Height);
 
@@ -60,16 +56,16 @@ namespace _2048
             BackColor = backColor;
             /*Подгон размеров всех элементов*/
             // Панель с матрицей.
-            pMatrix.Size = new Size(matrixCells * tileSize.Width + (Int32ervalBetweenTiles * (matrixCells + 1)), matrixRows * tileSize.Height + (Int32ervalBetweenTiles * (matrixRows + 1)));
-            pMatrix.Location = new Point(borderInt32erval, borderInt32erval);
+            pMatrix.Size = new Size(matrixCells * tileSize.Width + (intervalBetweenTiles * (matrixCells + 1)), matrixRows * tileSize.Height + (intervalBetweenTiles * (matrixRows + 1)));
+            pMatrix.Location = new Point(borderInterval, borderInterval);
 
             // Создание плиток.
             CreateMatrix();
 
             // Предполагаемые размеры формы.
             Size newFormSize = new Size();
-            Int32 supposedFormWidth = borderInt32erval * 2 + pMatrix.Size.Width;
-            Int32 supposedFormHeight = pMenu.Size.Height + (borderInt32erval * 2 + pMatrix.Size.Height);
+            Int32 supposedFormWidth = borderInterval * 2 + pMatrix.Size.Width;
+            Int32 supposedFormHeight = pMenu.Size.Height + (borderInterval * 2 + pMatrix.Size.Height);
             newFormSize.Width = normalFormSize.Width < supposedFormWidth ?
                 supposedFormWidth : normalFormSize.Width;
             newFormSize.Height = normalFormSize.Height < supposedFormHeight ?
@@ -79,13 +75,13 @@ namespace _2048
             pMatrix.Location = new Point(pField.Size.Width / 2 - pMatrix.Size.Width / 2, pField.Size.Height / 2 - pMatrix.Size.Height / 2);
         }
 
-        #region Методы
+        #region Methods
         // Создание плиток.
         private void CreateMatrix()
         {
-            tiles = ControlsGenerator.CreateButtons(matrixRows * matrixCells, tileSize, new Font("Microsoft Sans Serif", 20, FontStyle.Bold), Color.WhiteSmoke);
+            tiles = CreateButtons(matrixRows * matrixCells, tileSize, new Font("Microsoft Sans Serif", 20, FontStyle.Bold), Color.WhiteSmoke);
 
-            Point location = new Point(Int32ervalBetweenTiles, Int32ervalBetweenTiles);
+            Point location = new Point(intervalBetweenTiles, intervalBetweenTiles);
             for (Int32 i = 0; i < matrixRows; i++)
             {
                 for (Int32 j = 0; j < matrixCells; j++)
@@ -103,12 +99,29 @@ namespace _2048
                         tiles[matrixCells * i + j].Region = myRegion;
                     }
                     this.pMatrix.Controls.Add(tiles[matrixCells * i + j]);
-                    location.X += tileSize.Width + Int32ervalBetweenTiles;
+                    location.X += tileSize.Width + intervalBetweenTiles;
                 }
-                location.X = Int32ervalBetweenTiles;
-                location.Y += tileSize.Height + Int32ervalBetweenTiles;
+                location.X = intervalBetweenTiles;
+                location.Y += tileSize.Height + intervalBetweenTiles;
             }
         }
+        private Button[] CreateButtons(Int32 count, Size size, Font font, Color backColor)
+        {
+            if (font == null || backColor == null) return null;
+
+            Button[] buttons = new Button[count];
+            for (Int32 i = 0; i < count; i++)
+            {
+                buttons[i] = new Button()
+                {
+                    Size = size,
+                    Font = font,
+                    BackColor = backColor
+                };
+            }
+            return buttons;
+        }
+
         // Отображение матрицы на экране. Оптмизированная версия.
         private void ShowMatrix(Int32[,] oldMatrix)
         {
@@ -464,8 +477,8 @@ namespace _2048
                     matrixCells = br.ReadInt32();
                     Int32 size = br.ReadInt32();
                     tileSize = new Size(size, size);
-                    Int32ervalBetweenTiles = br.ReadInt32();
-                    borderInt32erval = br.ReadInt32();
+                    intervalBetweenTiles = br.ReadInt32();
+                    borderInterval = br.ReadInt32();
                     ellipseTile = br.ReadBoolean();
                 }
             }
@@ -487,13 +500,13 @@ namespace _2048
                     bw.Write(matrixRows);
                     bw.Write(matrixCells);
                     bw.Write(tileSize.Width);
-                    bw.Write(Int32ervalBetweenTiles);
-                    bw.Write(borderInt32erval);
+                    bw.Write(intervalBetweenTiles);
+                    bw.Write(borderInterval);
                     bw.Write(ellipseTile);
-                    bw.Write(this.BackColor.A);
-                    bw.Write(this.BackColor.R);
-                    bw.Write(this.BackColor.G);
-                    bw.Write(this.BackColor.B);
+                    bw.Write(BackColor.A);
+                    bw.Write(BackColor.R);
+                    bw.Write(BackColor.G);
+                    bw.Write(BackColor.B);
                 }
             }
             catch (IOException)
@@ -506,7 +519,7 @@ namespace _2048
             }
         }
         #endregion
-        #region События формы
+        #region Events
         private void bNewGame_Click(object sender, EventArgs e)
         {
             NewGame();
@@ -571,7 +584,7 @@ F12 - сбросить все рекорды.
             else if (e.KeyData == Keys.F12)
             {
                 var result = MessageBox.Show("Обнулить все рекорды?", "2048", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (result == System.Windows.Forms.DialogResult.Yes)
+                if (result == DialogResult.Yes)
                 {
                     ResetAllScores();
                     MessageBox.Show("Все рекорды сброшены", "2048");
@@ -633,40 +646,9 @@ F12 - сбросить все рекорды.
             Application.Exit();
         }
         #endregion
-
-        private void pMenu_MouseDown(object sender, MouseEventArgs e)
-        {
-            MainForm_MouseDown(sender, e);
-        }
-
-        private void MainForm_MouseDown(object sender, MouseEventArgs e)
-        {
-            Capture = false;
-            Message m = Message.Create(this.Handle, 0xa1, new IntPtr(2), IntPtr.Zero);
-            WndProc(ref m);
-        }
     }
 
-    struct ControlsGenerator
-    {
-        public static Button[] CreateButtons(Int32 count, Size size, Font font, Color backColor)
-        {
-            if (font == null || backColor == null) return null;
-
-            Button[] buttons = new Button[count];
-            for (Int32 i = 0; i < count; i++)
-            {
-                buttons[i] = new Button()
-                {
-                    Size = size,
-                    Font = font,
-                    BackColor = backColor
-                };
-            }
-            return buttons;
-        }
-    }
-
+    /*Кнопка, не получающая фокус.*/
     class NonFocusButton : Button
     {
         public NonFocusButton() => SetStyle(ControlStyles.Selectable, false);

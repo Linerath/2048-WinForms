@@ -30,13 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.pMenu = new System.Windows.Forms.Panel();
-            this.pField = new System.Windows.Forms.Panel();
-            this.pMatrix = new System.Windows.Forms.Panel();
             this.bUndo = new _2048.NonFocusButton();
             this.bOptions = new _2048.NonFocusButton();
             this.bBest = new _2048.NonFocusButton();
             this.bScore = new _2048.NonFocusButton();
             this.bNewGame = new _2048.NonFocusButton();
+            this.pField = new System.Windows.Forms.Panel();
+            this.pMatrix = new System.Windows.Forms.Panel();
             this.pMenu.SuspendLayout();
             this.pField.SuspendLayout();
             this.SuspendLayout();
@@ -54,27 +54,6 @@
             this.pMenu.Name = "pMenu";
             this.pMenu.Size = new System.Drawing.Size(423, 155);
             this.pMenu.TabIndex = 1;
-            this.pMenu.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pMenu_MouseDown);
-            // 
-            // pField
-            // 
-            this.pField.Controls.Add(this.pMatrix);
-            this.pField.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pField.Location = new System.Drawing.Point(0, 155);
-            this.pField.Margin = new System.Windows.Forms.Padding(4);
-            this.pField.Name = "pField";
-            this.pField.Size = new System.Drawing.Size(423, 389);
-            this.pField.TabIndex = 2;
-            // 
-            // pMatrix
-            // 
-            this.pMatrix.BackColor = System.Drawing.Color.LightGray;
-            this.pMatrix.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.pMatrix.Location = new System.Drawing.Point(15, 14);
-            this.pMatrix.Margin = new System.Windows.Forms.Padding(4);
-            this.pMatrix.Name = "pMatrix";
-            this.pMatrix.Size = new System.Drawing.Size(393, 363);
-            this.pMatrix.TabIndex = 9;
             // 
             // bUndo
             // 
@@ -165,6 +144,26 @@
             this.bNewGame.UseVisualStyleBackColor = false;
             this.bNewGame.Click += new System.EventHandler(this.bNewGame_Click);
             // 
+            // pField
+            // 
+            this.pField.Controls.Add(this.pMatrix);
+            this.pField.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pField.Location = new System.Drawing.Point(0, 155);
+            this.pField.Margin = new System.Windows.Forms.Padding(4);
+            this.pField.Name = "pField";
+            this.pField.Size = new System.Drawing.Size(423, 389);
+            this.pField.TabIndex = 2;
+            // 
+            // pMatrix
+            // 
+            this.pMatrix.BackColor = System.Drawing.Color.LightGray;
+            this.pMatrix.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.pMatrix.Location = new System.Drawing.Point(15, 14);
+            this.pMatrix.Margin = new System.Windows.Forms.Padding(4);
+            this.pMatrix.Name = "pMatrix";
+            this.pMatrix.Size = new System.Drawing.Size(393, 363);
+            this.pMatrix.TabIndex = 9;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -184,7 +183,6 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
             this.pMenu.ResumeLayout(false);
             this.pField.ResumeLayout(false);
             this.ResumeLayout(false);
